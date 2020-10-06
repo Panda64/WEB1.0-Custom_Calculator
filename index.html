@@ -27,7 +27,7 @@
         </section>
         <section id="result-section">
             <p id="result">
-                placeholder
+                Please enter all of your information to get your results displayed here...
             </p>
         </section>
     </body>
@@ -35,6 +35,8 @@
 <style>
     #result {
         margin-top: 75px;
+        font-size: 2em;
+        text-align: center;
     }
 
     body {
@@ -44,7 +46,14 @@
     #bmi {
         padding: 20px;
         border: solid 2px;
-        margin-right: 1000px;
+        margin-right: 500px;
+        margin-top: 75px;
+        margin-left: 500px;
+        padding-bottom: 40px;
+    }
+
+    #text {
+        text-align: center;
     }
 </style>
 <script>
@@ -62,17 +71,35 @@
 
         if (bmiValue < 18.5) {
             resultDisplay.innerHTML = `Your BMI is ${bmiValue.toFixed(2)}. This is classified as being underweight.`
+            resultDisplay.style.color = "red"
+            resultDisplay.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000"
         } else if (18.5 < bmiValue && bmiValue < 24.9) {
             resultDisplay.innerHTML = `Your BMI is ${bmiValue.toFixed(2)}. This is classifed as a normal BMI.`
+            resultDisplay.style.color = "limegreen"
+            resultDisplay.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000"
         } else if (25 < bmiValue && bmiValue < 29.9) {
             resultDisplay.innerHTML = `Your BMI is ${bmiValue.toFixed(2)}. This is classified as being overweight.`
+            resultDisplay.style.color = "yellow"
+            resultDisplay.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000"
         } else if (bmiValue >= 30) {
             resultDisplay.innerHTML = `Your BMI is ${bmiValue.toFixed(2)}. This is classified as being obease.`
+            resultDisplay.style.color = "red"
+            resultDisplay.style.textShadow = "-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000"
         }
     }
 
-    feetInput.addEventListener('input', calculateBMI)
-    inchesInput.addEventListener('input', calculateBMI)
-    weightInput.addEventListener('input', calculateBMI)
+    function checkFields() {
+        const feetValue = feetInput.value
+        const inchesValue = inchesInput.value
+        const weightValue = weightInput.value
+
+        if (feetValue !== "" && inchesValue !== "" && weightValue !== "") {
+            calculateBMI()
+        }
+    }
     
+    feetInput.addEventListener('input', checkFields)
+    inchesInput.addEventListener('input', checkFields)
+    weightInput.addEventListener('input', checkFields)
+
 </script>
